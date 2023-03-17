@@ -114,7 +114,7 @@ public class setUploadGeneral {
 
                 if (file2.isFile()) {
                     String filename = file2.getAbsolutePath();
-                    LOG.info("Uploading Files Pre Guias General " + filename + " ---> " + d_sftpdst_p);
+                    LOG.info("Uploading Files Preguia General " + filename + " ---> " + d_sftpdst_p);
                     d_sftp.put(filename, d_sftpdst_p);
                     file2.delete();
                     LOG.info("{} : Upload Ok", dateTimeFormatter.format(LocalDateTime.now()));

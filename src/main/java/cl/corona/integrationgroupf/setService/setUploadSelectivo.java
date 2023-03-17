@@ -85,7 +85,7 @@ public class setUploadSelectivo {
 
                 if (file.isFile()) {
                     String filename = file.getAbsolutePath();
-                    LOG.info("Uploading Files Congelado Selectivo" + filename + " ---> " + d_sftpdst);
+                    LOG.info("Uploading Files Congelado Selectivo " + filename + " ---> " + d_sftpdst);
                     d_sftp.put(filename, d_sftpdst);
                     file.delete();
                     LOG.info("{} : Upload Ok", dateTimeFormatter.format(LocalDateTime.now()));
@@ -108,7 +108,7 @@ public class setUploadSelectivo {
 
                 if (file2.isFile()) {
                     String filename = file2.getAbsolutePath();
-                    LOG.info("Uploading Files Preguias Selectivo" + filename + " ---> " + d_sftpdst);
+                    LOG.info("Uploading Files Preguias Selectivo " + filename + " ---> " + d_sftpdst);
                     d_sftp.put(filename, d_sftpdst);
                     file2.delete();
                     LOG.info("{} : Upload Ok", dateTimeFormatter.format(LocalDateTime.now()));

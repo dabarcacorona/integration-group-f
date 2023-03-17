@@ -125,7 +125,7 @@ public class setDownloadGeneral {
                 if (sSubCadena.equals("PHY_PG")) {
                     LOG.info("Downloading Pre Guias General " + (sftporg_PHY_PG + en.getFilename()) + " ---> " + pathdest2 + en.getFilename());
                     sftp.get(sftporg_PHY_PG + en.getFilename(), pathdest2 + en.getFilename());
-                    sftp.get(sftporg_PHY_PG + en.getFilename(), sftporg_PHY_PG_r + en.getFilename());
+                    sftp.put(pathdest2 + en.getFilename(), sftporg_PHY_PG_r + en.getFilename());
                     sftp.rm(sftporg_PHY_PG + en.getFilename());
                     LOG.info("{} : Download Ok", dateTimeFormatter.format(LocalDateTime.now()));
                 }

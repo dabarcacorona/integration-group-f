@@ -97,7 +97,6 @@ public class setDownloadSelectivo {
                 if (sSubCadena.equals("PHY")) {
                     LOG.info("Downloading Congelado Selectivo " + (sftporg + en.getFilename()) + " ---> " + pathdest + en.getFilename());
                     sftp.get(sftporg + en.getFilename(), pathdest + en.getFilename());
-                    sftp.get(sftporg + en.getFilename(), sftporg_PHY_PG_r + en.getFilename());
                     sftp.rm(sftporg + en.getFilename());
                     LOG.info("{} : Download Ok", dateTimeFormatter.format(LocalDateTime.now()));
                 }
@@ -122,8 +121,9 @@ public class setDownloadSelectivo {
                 //LOG.info(sSubCadena);
 
                 if (sSubCadena.equals("PHY_PG")) {
-                    LOG.info("Downloading Congelado General " + (sftporg_PHY_PG + en.getFilename()) + " ---> " + pathdest2 + en.getFilename());
+                    LOG.info("Downloading Preguia Selectivo " + (sftporg_PHY_PG + en.getFilename()) + " ---> " + pathdest2 + en.getFilename());
                     sftp.get(sftporg_PHY_PG + en.getFilename(), pathdest2 + en.getFilename());
+                    sftp.put(pathdest2 + en.getFilename(), sftporg_PHY_PG_r + en.getFilename());
                     sftp.rm(sftporg_PHY_PG + en.getFilename());
                     LOG.info("{} : Download Ok", dateTimeFormatter.format(LocalDateTime.now()));
                 }
