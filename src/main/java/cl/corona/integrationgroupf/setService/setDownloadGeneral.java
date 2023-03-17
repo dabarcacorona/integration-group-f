@@ -103,7 +103,7 @@ public class setDownloadGeneral {
 
             }
 
-            //PREGUIAS
+            //----PREGUIAS
 
             final String pathdest2 = strDir + separador + sftpdst_p + separador;
 
