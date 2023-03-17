@@ -31,8 +31,14 @@ public class setUploadGeneral {
     @Value("${sftpdinvg.org}")
     private String d_sftporg;
 
+    @Value("${sftpdinvg.org_p}")
+    private String d_sftporg_p;
+
     @Value("${sftpdinvg.dst}")
     private String d_sftpdst;
+
+    @Value("${sftpdinvg.dst_p}")
+    private String d_sftpdst_p;
 
     @Value("${name.file}")
     private String d_namefile;
@@ -85,6 +91,32 @@ public class setUploadGeneral {
                     LOG.info("Uploading Files Congelado General " + filename + " ---> " + d_sftpdst);
                     d_sftp.put(filename, d_sftpdst);
                     file.delete();
+                    LOG.info("{} : Upload Ok", dateTimeFormatter.format(LocalDateTime.now()));
+
+                }
+            }
+
+            //PREGUIAS
+
+            final String path2 = strDir + separador + d_sftporg_p;
+            //final String path = sftporg;
+
+            File directory2 = new File(path2);
+            File[] fList2 = directory2.listFiles();
+
+            for (File file2 : fList2) {
+
+                String name = StringUtils.getFilename(file2.getName());
+                int end = name.indexOf("_");
+                String sSubCadena = name.substring(0, end).toUpperCase();
+
+                //if (sSubCadena.equals(d_namefile)) {
+
+                if (file2.isFile()) {
+                    String filename = file2.getAbsolutePath();
+                    LOG.info("Uploading Files Pre Guias General " + filename + " ---> " + d_sftpdst_p);
+                    d_sftp.put(filename, d_sftpdst_p);
+                    file2.delete();
                     LOG.info("{} : Upload Ok", dateTimeFormatter.format(LocalDateTime.now()));
 
                 }
