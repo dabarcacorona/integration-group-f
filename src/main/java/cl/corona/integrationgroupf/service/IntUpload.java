@@ -140,7 +140,7 @@ public class IntUpload {
                         }
                         break;
                     //FLUJO TRD
-                    case "_MTCSDIINVMRD":
+                    case "MTCSDIINVMRD":
                         if (file.isFile()) {
                             String filename = file.getAbsolutePath();
                             //System.out.println(filename + " transfered to --> " + sftpdtn);

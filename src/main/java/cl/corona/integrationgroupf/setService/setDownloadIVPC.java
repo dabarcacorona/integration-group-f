@@ -84,7 +84,7 @@ public class setDownloadIVPC {
                 String sSubCadena = filename.substring(0, end).toUpperCase();
 
                 //LOG.info(sSubCadena);
-
+                //ARCHIVO VPC A PMM
                 if (sSubCadena.equals("SDIVPCMSI")) {
                     LOG.info("Downloading IVPC " + (o_sftpdtn_IVPC + en.getFilename()) + " ---> " + pathdest + en.getFilename());
                     sftp.get(o_sftpdtn_IVPC + en.getFilename(), pathdest + en.getFilename());

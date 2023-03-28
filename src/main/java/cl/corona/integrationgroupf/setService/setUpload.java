@@ -78,14 +78,17 @@ public class setUpload {
                 String sSubCadena = name.substring(0, end).toUpperCase();
 
                 //if (sSubCadena.equals(d_namefile)) {
-
-                if (file.isFile()) {
-                    String filename = file.getAbsolutePath();
-                    LOG.info("Uploading Files " + filename + " ---> " + d_sftpdst);
-                    d_sftp.put(filename, d_sftpdst);
-                    file.delete();
-                    LOG.info("{} : Upload Ok", dateTimeFormatter.format(LocalDateTime.now()));
-
+                switch (sSubCadena) {
+                    //FLUJO VPC A PMM
+                    case "SDIVPCMSI":
+                        if (file.isFile()) {
+                            String filename = file.getAbsolutePath();
+                            LOG.info("Uploading Files " + filename + " ---> " + d_sftpdst);
+                            d_sftp.put(filename, d_sftpdst);
+                            file.delete();
+                            LOG.info("{} : Upload Ok", dateTimeFormatter.format(LocalDateTime.now()));
+                        }
+                    break;
                 }
             }
 
