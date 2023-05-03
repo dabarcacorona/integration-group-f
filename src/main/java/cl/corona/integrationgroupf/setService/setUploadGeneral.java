@@ -34,11 +34,17 @@ public class setUploadGeneral {
     @Value("${sftpdinvg.org_p}")
     private String d_sftporg_p;
 
+    @Value("${sftpdinvg.org_m}")
+    private String d_sftporg_m;
+
     @Value("${sftpdinvg.dst}")
     private String d_sftpdst;
 
     @Value("${sftpdinvg.dst_p}")
     private String d_sftpdst_p;
+
+    @Value("${sftpdinvg.dst_m}")
+    private String d_sftpdst_m;
 
     @Value("${name.file}")
     private String d_namefile;
@@ -117,6 +123,32 @@ public class setUploadGeneral {
                     LOG.info("Uploading Files Preguia General " + filename + " ---> " + d_sftpdst_p);
                     d_sftp.put(filename, d_sftpdst_p);
                     file2.delete();
+                    LOG.info("{} : Upload Ok", dateTimeFormatter.format(LocalDateTime.now()));
+
+                }
+            }
+
+            //MAESTROS
+
+            final String path3 = strDir + separador + d_sftporg_m;
+            //final String path = sftporg;
+
+            File directory3 = new File(path3);
+            File[] fList3 = directory3.listFiles();
+
+            for (File file3 : fList3) {
+
+                String name = StringUtils.getFilename(file3.getName());
+                int end = name.indexOf("_");
+                String sSubCadena = name.substring(0, end).toUpperCase();
+
+                //if (sSubCadena.equals(d_namefile)) {
+
+                if (file3.isFile()) {
+                    String filename = file3.getAbsolutePath();
+                    LOG.info("Uploading Files Maestro General " + filename + " ---> " + d_sftpdst_m);
+                    d_sftp.put(filename, d_sftpdst_m);
+                    file3.delete();
                     LOG.info("{} : Upload Ok", dateTimeFormatter.format(LocalDateTime.now()));
 
                 }

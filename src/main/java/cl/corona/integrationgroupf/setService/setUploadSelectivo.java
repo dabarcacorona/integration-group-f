@@ -34,6 +34,9 @@ public class setUploadSelectivo {
     @Value("${sftpdinvs.org_p}")
     private String d_sftporg_p;
 
+    @Value("${sftpdinvs.org_m}")
+    private String d_sftporg_m;
+
     @Value("${sftpdinvs.dst}")
     private String d_sftpdst;
 
@@ -111,6 +114,31 @@ public class setUploadSelectivo {
                     LOG.info("Uploading Files Preguias Selectivo " + filename + " ---> " + d_sftpdst);
                     d_sftp.put(filename, d_sftpdst);
                     file2.delete();
+                    LOG.info("{} : Upload Ok", dateTimeFormatter.format(LocalDateTime.now()));
+
+                }
+            }
+
+            //MAESTRO
+
+            final String path3 = strDir + separador + d_sftporg_m;
+
+            File directory3 = new File(path3);
+            File[] fList3 = directory3.listFiles();
+
+            for (File file3 : fList3) {
+
+                String name = StringUtils.getFilename(file3.getName());
+                int end = name.indexOf("_");
+                String sSubCadena = name.substring(0, end).toUpperCase();
+
+                //if (sSubCadena.equals(d_namefile)) {
+
+                if (file3.isFile()) {
+                    String filename = file3.getAbsolutePath();
+                    LOG.info("Uploading Files Maestro Selectivo " + filename + " ---> " + d_sftpdst);
+                    d_sftp.put(filename, d_sftpdst);
+                    file3.delete();
                     LOG.info("{} : Upload Ok", dateTimeFormatter.format(LocalDateTime.now()));
 
                 }

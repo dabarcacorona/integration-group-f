@@ -37,11 +37,17 @@ public class setDownloadSelectivo {
     @Value("${sftpoinv.org_PHYPG_sr}")
     private String sftporg_PHY_PG_r;
 
+    @Value("${sftpoinv.org_PHY_TP_s}")
+    private String sftporg_PHY_TP;
+
     @Value("${sftpoinv.dsts_p}")
     private String sftpdst_p;
 
     @Value("${sftpoinv.dsts}")
     private String sftpdst;
+
+    @Value("${sftpoinv.dsts_m}")
+    private String sftpdst_m;
 
     @Value("${name.file}")
     private String namefile;
@@ -125,6 +131,35 @@ public class setDownloadSelectivo {
                     sftp.get(sftporg_PHY_PG + en.getFilename(), pathdest2 + en.getFilename());
                     sftp.put(pathdest2 + en.getFilename(), sftporg_PHY_PG_r + en.getFilename());
                     sftp.rm(sftporg_PHY_PG + en.getFilename());
+                    LOG.info("{} : Download Ok", dateTimeFormatter.format(LocalDateTime.now()));
+                }
+
+            }
+
+            //MAESTROS
+
+            final String pathdest3 = strDir + separador + sftpdst_m + separador;
+
+            Vector<ChannelSftp.LsEntry> entries3 = sftp.ls(sftporg_PHY_TP);
+
+            //download all files (except the ., .. and folders) from given folder
+            for (ChannelSftp.LsEntry en : entries3) {
+                if (en.getFilename().equals(".") || en.getFilename().equals("..") || en.getAttrs().isDir()) {
+                    continue;
+                }
+
+                String filename = StringUtils.getFilename(en.getFilename());
+                //String sSubCadena = filename.substring(0, largo_archivo).toUpperCase();
+                int end = filename.indexOf("_");
+                String sSubCadena = filename.substring(0, 6).toUpperCase();
+
+                //LOG.info(sSubCadena);
+
+                if (sSubCadena.equals("PHY_TP")) {
+                    LOG.info("Downloading Maestros Selectivo " + (sftporg_PHY_TP + en.getFilename()) + " ---> " + pathdest3 + en.getFilename());
+                    sftp.get(sftporg_PHY_TP + en.getFilename(), pathdest3 + en.getFilename());
+                    //sftp.put(pathdest3 + en.getFilename(), sftporg_PHY_PG_r + en.getFilename());
+                    sftp.rm(sftporg_PHY_TP + en.getFilename());
                     LOG.info("{} : Download Ok", dateTimeFormatter.format(LocalDateTime.now()));
                 }
 
